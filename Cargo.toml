@@ -29,6 +29,7 @@ default = []
 blas = ["ndarray/blas", "blas-sys"]
 openblas = ["blas", "blas-sys/openblas"]
 accelerate = ["blas", "blas-sys/accelerate"]
+tf = [ "tensorflow" ]
 
 [build-dependencies]
 protoc-rust   = "1.4"
