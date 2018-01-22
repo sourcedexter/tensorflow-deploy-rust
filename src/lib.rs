@@ -34,6 +34,7 @@ extern crate log;
 #[allow(unused_imports)]
 #[macro_use]
 extern crate ndarray;
+extern crate nnpack;
 extern crate num_traits;
 extern crate protobuf;
 #[cfg(test)]

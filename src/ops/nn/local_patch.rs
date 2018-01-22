@@ -114,18 +114,16 @@ impl LocalPatch {
         }
     }
 
-    fn pad<T>(
+    fn padding<T>(
         &self,
         data: ArrayView4<T>,
-        shape: (usize, usize),
-        item: T,
-    ) -> Result<Option<Array4<T>>>
+        filter_shape: (usize, usize)
+    ) -> (usize, usize, usize, usize)
     where
-        T: Copy + ::num_traits::Zero + ::std::fmt::Debug,
-    {
+        T: Copy + ::num_traits::Zero + ::std::fmt::Debug, {
         let img = BatchImageWrapper(data);
         let stride = self.strides[1];
-        let (filter_rows, filter_cols) = shape;
+        let (filter_rows, filter_cols) = filter_shape;
 
         if self.padding == Padding::Same {
             // https://www.tensorflow.org/api_guides/python/nn#Convolution
@@ -151,6 +149,23 @@ impl LocalPatch {
             let right_padding = h_padding - left_padding;
             let top_padding = v_padding / 2;
             let bottom_padding = v_padding - top_padding;
+            (left_padding, right_padding, top_padding, bottom_padding)
+        } else {
+            (0, 0, 0, 0)
+        }
+    }
+
+    fn pad<T>(
+        &self,
+        data: ArrayView4<T>,
+        filter_shape: (usize, usize),
+        item: T,
+    ) -> Result<Option<Array4<T>>>
+    where
+        T: Copy + ::num_traits::Zero + ::std::fmt::Debug, {
+        let img = BatchImageWrapper(data);
+        if self.padding == Padding::Same {
+            let (left_padding, right_padding, top_padding, bottom_padding) = self.padding(data, filter_shape);
             let left_padding = ::ndarray::Array4::<T>::from_elem(
                 (img.count(), img.height(), left_padding, img.depth()),
                 item,
@@ -244,6 +259,7 @@ impl Conv2D {
 }
 
 impl Op for Conv2D {
+/*
     fn eval(&self, mut inputs: Vec<Matrix>) -> Result<Vec<Matrix>> {
         // [ filter_rows, filter_cols, in_depth, out_depth]
         let filter = inputs.remove(1).take_f32s().ok_or(
@@ -285,6 +301,111 @@ impl Op for Conv2D {
         let views: Vec<ArrayView4<f32>> = transformed.iter().map(|m| m.view()).collect();
         Ok(vec![::ndarray::stack(Axis(0), &*views)?.into_dyn().into()])
     }
+*/
+
+    fn eval(&self, mut inputs: Vec<Matrix>) -> Result<Vec<Matrix>> {
+        // [ filter_rows, filter_cols, in_depth, out_depth]
+        let filter = inputs.remove(1).take_f32s().ok_or(
+            "Expect input #1 to be f32",
+        )?;
+        // [ batch, in_rows, in_cols, in_depth ]
+        let data = inputs.remove(0).take_f32s().ok_or(
+            "Expect input #0 to be f32",
+        )?;
+
+        let batches = data.shape()[0];
+        let in_rows = data.shape()[1];
+        let in_cols = data.shape()[2];
+        let in_depth = data.shape()[3];
+        let filter_rows = filter.shape()[0];
+        let filter_cols = filter.shape()[1];
+        let out_depth = filter.shape()[3];
+
+        let (out_height, out_width) = self.0.adjusted_dim(
+            in_rows,
+            in_cols,
+            (filter_rows, filter_cols),
+        );
+        let padding = self.0.padding(data.view().into_shape((batches, in_rows, in_cols, in_depth))?, (filter_rows, filter_cols));
+
+        use nnpack::ffi::*;
+        unsafe {
+            let nnpack = ::nnpack::NnpackHandle::new();
+            let data = nhwc_to_nchw(data.view())?;
+            let filter = rcio_to_oirc(filter.view())?;
+            let bias = vec!(0f32; out_depth);
+            let mut output = Array3::uninitialized((out_depth, out_height, out_width));
+            let status = ::nnpack::ffi::nnp_convolution_inference(
+                nnp_convolution_algorithm::nnp_convolution_algorithm_auto,
+                nnp_convolution_transform_strategy::nnp_convolution_transform_strategy_block_based,
+                in_depth, out_depth,
+                nnp_size { width: in_cols, height: in_rows },
+                nnp_padding { top:padding.2, bottom:padding.3, right: padding.1, left: padding.0},
+                nnp_size { width: filter_cols, height: filter_rows },
+                nnp_size { width: self.0.strides[2], height: self.0.strides[1] },
+                data.as_ptr(),
+                filter.as_ptr(),
+                bias.as_ptr(),
+                output.as_mut_ptr(),
+                0 as _, 0,
+                nnp_activation::nnp_activation_identity,
+                0 as _,
+                0 as _, 0 as _);
+            let out = chw_to_whc(output.into_dyn().view())?;
+            let out = out.into_shape(
+                      (1, out_height, out_width, out_depth),
+                   )?;
+            Ok(vec!(out.into_dyn().into()))
+        }
+    }
+}
+
+#[inline(never)]
+fn nhwc_to_nchw(a: ArrayViewD<f32>) -> Result<ArrayD<f32>> {
+    let shape_in = (a.shape()[0], a.shape()[1], a.shape()[2], a.shape()[3]);
+    let data = a.into_shape(shape_in)?;
+    let shape_out = [shape_in.0, shape_in.3, shape_in.1, shape_in.2];
+    let out = Array4::<f32>::from_shape_fn(shape_out, move |d| {
+        data[(d.0, d.2, d.3, d.1)]
+    });
+    Ok(out.into_dyn())
+}
+
+#[inline(never)]
+fn rcio_to_oirc(a: ArrayViewD<f32>) -> Result<ArrayD<f32>> {
+    let shape_in = (a.shape()[0], a.shape()[1], a.shape()[2], a.shape()[3]);
+    let data = a.into_shape(shape_in)?;
+    let shape_out = [shape_in.3, shape_in.2, shape_in.0, shape_in.1];
+    let out = Array4::<f32>::from_shape_fn(shape_out, move |d| {
+        data[(d.2, d.3, d.1, d.0)]
+    });
+    Ok(out.into_dyn())
+}
+
+#[inline(never)]
+fn chw_to_whc(a: ArrayViewD<f32>) -> Result<ArrayD<f32>> {
+    let shape_in = (a.shape()[0], a.shape()[1], a.shape()[2]);
+    let data = a.into_shape(shape_in)?;
+    let shape_out = [shape_in.1, shape_in.2, shape_in.0];
+    let out = Array3::<f32>::from_shape_fn(shape_out, move |d| {
+        data[(d.2, d.0, d.1)]
+    });
+    Ok(out.into_dyn())
+}
+
+fn permute_axis(a: ArrayViewD<f32>, order: &[usize]) -> Result<ArrayD<f32>> {
+    if order.len() != a.shape().len() {
+        Err(format!("trying to permute axis {:?} on a mat {:?}", order, a.shape()))?
+    }
+    let mut loc = vec!(0usize; order.len());
+    let out_shape:Vec<_> = order.iter().map(|i| a.shape()[*i]).collect();
+    let out = ArrayD::<f32>::from_shape_fn(out_shape, move |dims| {
+        for (axis,offset) in dims.as_array_view().iter().enumerate() {
+            loc[order[axis]] = *offset;
+        }
+        a[&*loc]
+    });
+    Ok(out)
 }
 
 fn into_4d<T>(data: ArrayD<T>) -> Result<Array4<T>> {
@@ -416,13 +537,8 @@ mod tests {
         }).eval(vec![mk(input), mk(filter)])
             .unwrap()
             .remove(0);
-        assert_eq!(expect.len(), result.shape().iter().product::<usize>());
-        let found = result
-            .take_f32s()
-            .unwrap()
-            .into_shape((expect.len()))
-            .unwrap();
-        assert_eq!(expect, found.as_slice().unwrap());
+        let expect:Matrix = ::ndarray::Array::from_iter(expect.iter().map(|x|*x)).into_shape(result.shape()).unwrap().into_dyn().into();
+        assert!(expect.close_enough(&result));
     }
 
     #[test]
@@ -505,6 +621,36 @@ mod tests {
         assert!(exp.close_enough(
             &conv.eval(vec![data.clone(), filter]).unwrap()[0],
         ))
+    }
+
+
+    #[test]
+    fn test_conv_nnpack_1() {
+        use nnpack::ffi::*;
+        let mut output = [-1.0f32];
+        unsafe {
+            let res = nnp_initialize();
+            assert!(res.is_ok());
+            println!("res: {:?}", res);
+            let res = nnp_convolution_inference(
+                nnp_convolution_algorithm::nnp_convolution_algorithm_implicit_gemm,
+                nnp_convolution_transform_strategy::nnp_convolution_transform_strategy_block_based,
+                1, 1,
+                nnp_size { width: 1, height: 1 },
+                nnp_padding { top:0, bottom:0, right: 0, left: 0},
+                nnp_size { width: 1, height: 1 },
+                nnp_size { width: 1, height: 1 },
+                [1.0f32].as_ptr(),
+                [3.0f32].as_ptr(),
+                [0.0f32].as_ptr(),
+                output.as_mut_ptr(),
+                0 as _, 0,
+                nnp_activation::nnp_activation_identity,
+                0 as _,
+                0 as _, 0 as _);
+            assert!(res.is_ok());
+        }
+        assert_eq!(&[3.0], &output);
     }
 
     #[test]
