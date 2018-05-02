@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["file_descriptor_proto",""]],"struct":[["OpDef",""],["OpDef_ArgDef",""],["OpDef_AttrDef",""],["OpDeprecation",""],["OpList",""]]});

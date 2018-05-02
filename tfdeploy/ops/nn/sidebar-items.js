@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["arr4",""],["register_all_ops",""]],"mod":[["conv2d",""],["local_patch",""],["pools",""],["space_to_batch",""]],"struct":[["Relu",""],["Softmax",""]]});

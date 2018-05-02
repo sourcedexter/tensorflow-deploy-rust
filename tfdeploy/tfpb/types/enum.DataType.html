@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `DataType` enum in crate `tfdeploy`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, DataType">
+
+    <title>tfdeploy::tfpb::types::DataType - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle">
+    
+    <link rel="stylesheet" type="text/css" href="../../../dark.css">
+    <link rel="stylesheet" type="text/css" href="../../../main.css" id="themeStyle">
+    <script src="../../../storage.js"></script>
+    
+
+    
+    
+</head>
+<body class="rustdoc enum">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
+        
+        <p class='location'>Enum DataType</p><div class="sidebar-elems"><div class="block items"><a class="sidebar-title" href="#variants">Variants</a><div class="sidebar-links"><a href="#variant.DT_INVALID">DT_INVALID</a><a href="#variant.DT_FLOAT">DT_FLOAT</a><a href="#variant.DT_DOUBLE">DT_DOUBLE</a><a href="#variant.DT_INT32">DT_INT32</a><a href="#variant.DT_UINT8">DT_UINT8</a><a href="#variant.DT_INT16">DT_INT16</a><a href="#variant.DT_INT8">DT_INT8</a><a href="#variant.DT_STRING">DT_STRING</a><a href="#variant.DT_COMPLEX64">DT_COMPLEX64</a><a href="#variant.DT_INT64">DT_INT64</a><a href="#variant.DT_BOOL">DT_BOOL</a><a href="#variant.DT_QINT8">DT_QINT8</a><a href="#variant.DT_QUINT8">DT_QUINT8</a><a href="#variant.DT_QINT32">DT_QINT32</a><a href="#variant.DT_BFLOAT16">DT_BFLOAT16</a><a href="#variant.DT_QINT16">DT_QINT16</a><a href="#variant.DT_QUINT16">DT_QUINT16</a><a href="#variant.DT_UINT16">DT_UINT16</a><a href="#variant.DT_COMPLEX128">DT_COMPLEX128</a><a href="#variant.DT_HALF">DT_HALF</a><a href="#variant.DT_RESOURCE">DT_RESOURCE</a><a href="#variant.DT_FLOAT_REF">DT_FLOAT_REF</a><a href="#variant.DT_DOUBLE_REF">DT_DOUBLE_REF</a><a href="#variant.DT_INT32_REF">DT_INT32_REF</a><a href="#variant.DT_UINT8_REF">DT_UINT8_REF</a><a href="#variant.DT_INT16_REF">DT_INT16_REF</a><a href="#variant.DT_INT8_REF">DT_INT8_REF</a><a href="#variant.DT_STRING_REF">DT_STRING_REF</a><a href="#variant.DT_COMPLEX64_REF">DT_COMPLEX64_REF</a><a href="#variant.DT_INT64_REF">DT_INT64_REF</a><a href="#variant.DT_BOOL_REF">DT_BOOL_REF</a><a href="#variant.DT_QINT8_REF">DT_QINT8_REF</a><a href="#variant.DT_QUINT8_REF">DT_QUINT8_REF</a><a href="#variant.DT_QINT32_REF">DT_QINT32_REF</a><a href="#variant.DT_BFLOAT16_REF">DT_BFLOAT16_REF</a><a href="#variant.DT_QINT16_REF">DT_QINT16_REF</a><a href="#variant.DT_QUINT16_REF">DT_QUINT16_REF</a><a href="#variant.DT_UINT16_REF">DT_UINT16_REF</a><a href="#variant.DT_COMPLEX128_REF">DT_COMPLEX128_REF</a><a href="#variant.DT_HALF_REF">DT_HALF_REF</a><a href="#variant.DT_RESOURCE_REF">DT_RESOURCE_REF</a></div><a class="sidebar-title" href="#implementations">Trait Implementations</a><div class="sidebar-links"><a href="#impl-Clone">Clone</a><a href="#impl-PartialEq">PartialEq</a><a href="#impl-Eq">Eq</a><a href="#impl-Debug">Debug</a><a href="#impl-Hash">Hash</a><a href="#impl-ProtobufEnum">ProtobufEnum</a><a href="#impl-Copy">Copy</a><a href="#impl-Default">Default</a><a href="#impl-ProtobufValue">ProtobufValue</a><a href="#impl-From%3CDataType%3E">From&lt;DataType&gt;</a></div></div><p class='location'><a href='../../index.html'>tfdeploy</a>::<wbr><a href='../index.html'>tfpb</a>::<wbr><a href='index.html'>types</a></p><script>window.sidebarCurrent = {name: 'DataType', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script></div>
+    </nav>
+
+    <div class="theme-picker">
+        <button id="theme-picker" aria-label="Pick another theme!">
+            <img src="../../../brush.svg" width="18" alt="Pick another theme!">
+        </button>
+        <div id="theme-choices"></div>
+    </div>
+    <script src="../../../theme.js"></script>
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Enum <a href='../../index.html'>tfdeploy</a>::<wbr><a href='../index.html'>tfpb</a>::<wbr><a href='index.html'>types</a>::<wbr><a class="enum" href=''>DataType</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../../../src/tfdeploy/home/travis/build/kali/tensorflow-deploy-rust/target/debug/build/tfdeploy-d1e3f70959f7d45d/out/types.rs.html#12-54' title='goto source code'>[src]</a></span></h1>
+<pre class='rust enum'>pub enum DataType {
+    DT_INVALID,
+    DT_FLOAT,
+    DT_DOUBLE,
+    DT_INT32,
+    DT_UINT8,
+    DT_INT16,
+    DT_INT8,
+    DT_STRING,
+    DT_COMPLEX64,
+    DT_INT64,
+    DT_BOOL,
+    DT_QINT8,
+    DT_QUINT8,
+    DT_QINT32,
+    DT_BFLOAT16,
+    DT_QINT16,
+    DT_QUINT16,
+    DT_UINT16,
+    DT_COMPLEX128,
+    DT_HALF,
+    DT_RESOURCE,
+    DT_FLOAT_REF,
+    DT_DOUBLE_REF,
+    DT_INT32_REF,
+    DT_UINT8_REF,
+    DT_INT16_REF,
+    DT_INT8_REF,
+    DT_STRING_REF,
+    DT_COMPLEX64_REF,
+    DT_INT64_REF,
+    DT_BOOL_REF,
+    DT_QINT8_REF,
+    DT_QUINT8_REF,
+    DT_QINT32_REF,
+    DT_BFLOAT16_REF,
+    DT_QINT16_REF,
+    DT_QUINT16_REF,
+    DT_UINT16_REF,
+    DT_COMPLEX128_REF,
+    DT_HALF_REF,
+    DT_RESOURCE_REF,
+}</pre><h2 id='variants' class='variants small-section-header'>
+                   Variants<a href='#variants' class='anchor'></a></h2>
+<span id="variant.DT_INVALID" class="variant small-section-header"><a href="#variant.DT_INVALID" class="anchor field"></a><span id='DT_INVALID.v' class='invisible'><code>DT_INVALID</code></span></span><span id="variant.DT_FLOAT" class="variant small-section-header"><a href="#variant.DT_FLOAT" class="anchor field"></a><span id='DT_FLOAT.v' class='invisible'><code>DT_FLOAT</code></span></span><span id="variant.DT_DOUBLE" class="variant small-section-header"><a href="#variant.DT_DOUBLE" class="anchor field"></a><span id='DT_DOUBLE.v' class='invisible'><code>DT_DOUBLE</code></span></span><span id="variant.DT_INT32" class="variant small-section-header"><a href="#variant.DT_INT32" class="anchor field"></a><span id='DT_INT32.v' class='invisible'><code>DT_INT32</code></span></span><span id="variant.DT_UINT8" class="variant small-section-header"><a href="#variant.DT_UINT8" class="anchor field"></a><span id='DT_UINT8.v' class='invisible'><code>DT_UINT8</code></span></span><span id="variant.DT_INT16" class="variant small-section-header"><a href="#variant.DT_INT16" class="anchor field"></a><span id='DT_INT16.v' class='invisible'><code>DT_INT16</code></span></span><span id="variant.DT_INT8" class="variant small-section-header"><a href="#variant.DT_INT8" class="anchor field"></a><span id='DT_INT8.v' class='invisible'><code>DT_INT8</code></span></span><span id="variant.DT_STRING" class="variant small-section-header"><a href="#variant.DT_STRING" class="anchor field"></a><span id='DT_STRING.v' class='invisible'><code>DT_STRING</code></span></span><span id="variant.DT_COMPLEX64" class="variant small-section-header"><a href="#variant.DT_COMPLEX64" class="anchor field"></a><span id='DT_COMPLEX64.v' class='invisible'><code>DT_COMPLEX64</code></span></span><span id="variant.DT_INT64" class="variant small-section-header"><a href="#variant.DT_INT64" class="anchor field"></a><span id='DT_INT64.v' class='invisible'><code>DT_INT64</code></span></span><span id="variant.DT_BOOL" class="variant small-section-header"><a href="#variant.DT_BOOL" class="anchor field"></a><span id='DT_BOOL.v' class='invisible'><code>DT_BOOL</code></span></span><span id="variant.DT_QINT8" class="variant small-section-header"><a href="#variant.DT_QINT8" class="anchor field"></a><span id='DT_QINT8.v' class='invisible'><code>DT_QINT8</code></span></span><span id="variant.DT_QUINT8" class="variant small-section-header"><a href="#variant.DT_QUINT8" class="anchor field"></a><span id='DT_QUINT8.v' class='invisible'><code>DT_QUINT8</code></span></span><span id="variant.DT_QINT32" class="variant small-section-header"><a href="#variant.DT_QINT32" class="anchor field"></a><span id='DT_QINT32.v' class='invisible'><code>DT_QINT32</code></span></span><span id="variant.DT_BFLOAT16" class="variant small-section-header"><a href="#variant.DT_BFLOAT16" class="anchor field"></a><span id='DT_BFLOAT16.v' class='invisible'><code>DT_BFLOAT16</code></span></span><span id="variant.DT_QINT16" class="variant small-section-header"><a href="#variant.DT_QINT16" class="anchor field"></a><span id='DT_QINT16.v' class='invisible'><code>DT_QINT16</code></span></span><span id="variant.DT_QUINT16" class="variant small-section-header"><a href="#variant.DT_QUINT16" class="anchor field"></a><span id='DT_QUINT16.v' class='invisible'><code>DT_QUINT16</code></span></span><span id="variant.DT_UINT16" class="variant small-section-header"><a href="#variant.DT_UINT16" class="anchor field"></a><span id='DT_UINT16.v' class='invisible'><code>DT_UINT16</code></span></span><span id="variant.DT_COMPLEX128" class="variant small-section-header"><a href="#variant.DT_COMPLEX128" class="anchor field"></a><span id='DT_COMPLEX128.v' class='invisible'><code>DT_COMPLEX128</code></span></span><span id="variant.DT_HALF" class="variant small-section-header"><a href="#variant.DT_HALF" class="anchor field"></a><span id='DT_HALF.v' class='invisible'><code>DT_HALF</code></span></span><span id="variant.DT_RESOURCE" class="variant small-section-header"><a href="#variant.DT_RESOURCE" class="anchor field"></a><span id='DT_RESOURCE.v' class='invisible'><code>DT_RESOURCE</code></span></span><span id="variant.DT_FLOAT_REF" class="variant small-section-header"><a href="#variant.DT_FLOAT_REF" class="anchor field"></a><span id='DT_FLOAT_REF.v' class='invisible'><code>DT_FLOAT_REF</code></span></span><span id="variant.DT_DOUBLE_REF" class="variant small-section-header"><a href="#variant.DT_DOUBLE_REF" class="anchor field"></a><span id='DT_DOUBLE_REF.v' class='invisible'><code>DT_DOUBLE_REF</code></span></span><span id="variant.DT_INT32_REF" class="variant small-section-header"><a href="#variant.DT_INT32_REF" class="anchor field"></a><span id='DT_INT32_REF.v' class='invisible'><code>DT_INT32_REF</code></span></span><span id="variant.DT_UINT8_REF" class="variant small-section-header"><a href="#variant.DT_UINT8_REF" class="anchor field"></a><span id='DT_UINT8_REF.v' class='invisible'><code>DT_UINT8_REF</code></span></span><span id="variant.DT_INT16_REF" class="variant small-section-header"><a href="#variant.DT_INT16_REF" class="anchor field"></a><span id='DT_INT16_REF.v' class='invisible'><code>DT_INT16_REF</code></span></span><span id="variant.DT_INT8_REF" class="variant small-section-header"><a href="#variant.DT_INT8_REF" class="anchor field"></a><span id='DT_INT8_REF.v' class='invisible'><code>DT_INT8_REF</code></span></span><span id="variant.DT_STRING_REF" class="variant small-section-header"><a href="#variant.DT_STRING_REF" class="anchor field"></a><span id='DT_STRING_REF.v' class='invisible'><code>DT_STRING_REF</code></span></span><span id="variant.DT_COMPLEX64_REF" class="variant small-section-header"><a href="#variant.DT_COMPLEX64_REF" class="anchor field"></a><span id='DT_COMPLEX64_REF.v' class='invisible'><code>DT_COMPLEX64_REF</code></span></span><span id="variant.DT_INT64_REF" class="variant small-section-header"><a href="#variant.DT_INT64_REF" class="anchor field"></a><span id='DT_INT64_REF.v' class='invisible'><code>DT_INT64_REF</code></span></span><span id="variant.DT_BOOL_REF" class="variant small-section-header"><a href="#variant.DT_BOOL_REF" class="anchor field"></a><span id='DT_BOOL_REF.v' class='invisible'><code>DT_BOOL_REF</code></span></span><span id="variant.DT_QINT8_REF" class="variant small-section-header"><a href="#variant.DT_QINT8_REF" class="anchor field"></a><span id='DT_QINT8_REF.v' class='invisible'><code>DT_QINT8_REF</code></span></span><span id="variant.DT_QUINT8_REF" class="variant small-section-header"><a href="#variant.DT_QUINT8_REF" class="anchor field"></a><span id='DT_QUINT8_REF.v' class='invisible'><code>DT_QUINT8_REF</code></span></span><span id="variant.DT_QINT32_REF" class="variant small-section-header"><a href="#variant.DT_QINT32_REF" class="anchor field"></a><span id='DT_QINT32_REF.v' class='invisible'><code>DT_QINT32_REF</code></span></span><span id="variant.DT_BFLOAT16_REF" class="variant small-section-header"><a href="#variant.DT_BFLOAT16_REF" class="anchor field"></a><span id='DT_BFLOAT16_REF.v' class='invisible'><code>DT_BFLOAT16_REF</code></span></span><span id="variant.DT_QINT16_REF" class="variant small-section-header"><a href="#variant.DT_QINT16_REF" class="anchor field"></a><span id='DT_QINT16_REF.v' class='invisible'><code>DT_QINT16_REF</code></span></span><span id="variant.DT_QUINT16_REF" class="variant small-section-header"><a href="#variant.DT_QUINT16_REF" class="anchor field"></a><span id='DT_QUINT16_REF.v' class='invisible'><code>DT_QUINT16_REF</code></span></span><span id="variant.DT_UINT16_REF" class="variant small-section-header"><a href="#variant.DT_UINT16_REF" class="anchor field"></a><span id='DT_UINT16_REF.v' class='invisible'><code>DT_UINT16_REF</code></span></span><span id="variant.DT_COMPLEX128_REF" class="variant small-section-header"><a href="#variant.DT_COMPLEX128_REF" class="anchor field"></a><span id='DT_COMPLEX128_REF.v' class='invisible'><code>DT_COMPLEX128_REF</code></span></span><span id="variant.DT_HALF_REF" class="variant small-section-header"><a href="#variant.DT_HALF_REF" class="anchor field"></a><span id='DT_HALF_REF.v' class='invisible'><code>DT_HALF_REF</code></span></span><span id="variant.DT_RESOURCE_REF" class="variant small-section-header"><a href="#variant.DT_RESOURCE_REF" class="anchor field"></a><span id='DT_RESOURCE_REF.v' class='invisible'><code>DT_RESOURCE_REF</code></span></span>
+            <h2 id='implementations' class='small-section-header'>
+              Trait Implementations<a href='#implementations' class='anchor'></a>
+            </h2>
+        <h3 id='impl-Clone' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a> for <a class="enum" href="../../../tfdeploy/tfpb/types/enum.DataType.html" title="enum tfdeploy::tfpb::types::DataType">DataType</a></code><a href='#impl-Clone' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/tfdeploy/home/travis/build/kali/tensorflow-deploy-rust/target/debug/build/tfdeploy-d1e3f70959f7d45d/out/types.rs.html#11' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.clone' class="method"><span id='clone.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class="enum" href="../../../tfdeploy/tfpb/types/enum.DataType.html" title="enum tfdeploy::tfpb::types::DataType">DataType</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/tfdeploy/home/travis/build/kali/tensorflow-deploy-rust/target/debug/build/tfdeploy-d1e3f70959f7d45d/out/types.rs.html#11' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Returns a copy of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></p>
+</div><h4 id='method.clone_from' class="method"><span id='clone_from.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;</a>Self)</code></span><span class='out-of-band'><div class='ghost'></div><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/clone.rs.html#112-114' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Performs copy-assignment from <code>source</code>. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from">Read more</a></p>
+</div></div><h3 id='impl-PartialEq' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html" title="trait core::cmp::PartialEq">PartialEq</a> for <a class="enum" href="../../../tfdeploy/tfpb/types/enum.DataType.html" title="enum tfdeploy::tfpb::types::DataType">DataType</a></code><a href='#impl-PartialEq' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/tfdeploy/home/travis/build/kali/tensorflow-deploy-rust/target/debug/build/tfdeploy-d1e3f70959f7d45d/out/types.rs.html#11' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.eq' class="method"><span id='eq.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#tymethod.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class="enum" href="../../../tfdeploy/tfpb/types/enum.DataType.html" title="enum tfdeploy::tfpb::types::DataType">DataType</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/tfdeploy/home/travis/build/kali/tensorflow-deploy-rust/target/debug/build/tfdeploy-d1e3f70959f7d45d/out/types.rs.html#11' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>This method tests for <code>self</code> and <code>other</code> values to be equal, and is used by <code>==</code>. <a href="https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#tymethod.eq">Read more</a></p>
+</div><h4 id='method.ne' class="method"><span id='ne.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.ne' class='fnname'>ne</a>(&amp;self, other: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;</a>Rhs) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/cmp.rs.html#121' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>This method tests for <code>!=</code>.</p>
+</div></div><h3 id='impl-Eq' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/cmp/trait.Eq.html" title="trait core::cmp::Eq">Eq</a> for <a class="enum" href="../../../tfdeploy/tfpb/types/enum.DataType.html" title="enum tfdeploy::tfpb::types::DataType">DataType</a></code><a href='#impl-Eq' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/tfdeploy/home/travis/build/kali/tensorflow-deploy-rust/target/debug/build/tfdeploy-d1e3f70959f7d45d/out/types.rs.html#11' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div><h3 id='impl-Debug' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="enum" href="../../../tfdeploy/tfpb/types/enum.DataType.html" title="enum tfdeploy::tfpb::types::DataType">DataType</a></code><a href='#impl-Debug' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/tfdeploy/home/travis/build/kali/tensorflow-deploy-rust/target/debug/build/tfdeploy-d1e3f70959f7d45d/out/types.rs.html#11' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/tfdeploy/home/travis/build/kali/tensorflow-deploy-rust/target/debug/build/tfdeploy-d1e3f70959f7d45d/out/types.rs.html#11' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Formats the value using the given formatter. <a href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt">Read more</a></p>
+</div></div><h3 id='impl-Hash' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/hash/trait.Hash.html" title="trait core::hash::Hash">Hash</a> for <a class="enum" href="../../../tfdeploy/tfpb/types/enum.DataType.html" title="enum tfdeploy::tfpb::types::DataType">DataType</a></code><a href='#impl-Hash' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/tfdeploy/home/travis/build/kali/tensorflow-deploy-rust/target/debug/build/tfdeploy-d1e3f70959f7d45d/out/types.rs.html#11' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.hash' class="method"><span id='hash.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/hash/trait.Hash.html#tymethod.hash' class='fnname'>hash</a>&lt;__H:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/core/hash/trait.Hasher.html" title="trait core::hash::Hasher">Hasher</a>&gt;(&amp;self, __arg_0: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;mut </a>__H)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/tfdeploy/home/travis/build/kali/tensorflow-deploy-rust/target/debug/build/tfdeploy-d1e3f70959f7d45d/out/types.rs.html#11' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Feeds this value into the given [<code>Hasher</code>]. <a href="https://doc.rust-lang.org/nightly/core/hash/trait.Hash.html#tymethod.hash">Read more</a></p>
+</div><h4 id='method.hash_slice' class="method"><span id='hash_slice.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/hash/trait.Hash.html#method.hash_slice' class='fnname'>hash_slice</a>&lt;H&gt;(data: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">&amp;[Self]</a>, state: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;mut </a>H) <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;H: <a class="trait" href="https://doc.rust-lang.org/nightly/core/hash/trait.Hasher.html" title="trait core::hash::Hasher">Hasher</a>,&nbsp;</span></code></span><span class='out-of-band'><div class='ghost'></div><div class='since' title='Stable since Rust version 1.3.0'>1.3.0</div><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/hash/mod.rs.html#202-208' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Feeds a slice of this type into the given [<code>Hasher</code>]. <a href="https://doc.rust-lang.org/nightly/core/hash/trait.Hash.html#method.hash_slice">Read more</a></p>
+</div></div><h3 id='impl-ProtobufEnum' class='impl'><span class='in-band'><code>impl <a class="trait" href="../../../protobuf/core/trait.ProtobufEnum.html" title="trait protobuf::core::ProtobufEnum">ProtobufEnum</a> for <a class="enum" href="../../../tfdeploy/tfpb/types/enum.DataType.html" title="enum tfdeploy::tfpb::types::DataType">DataType</a></code><a href='#impl-ProtobufEnum' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/tfdeploy/home/travis/build/kali/tensorflow-deploy-rust/target/debug/build/tfdeploy-d1e3f70959f7d45d/out/types.rs.html#56-166' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.value' class="method"><span id='value.v' class='invisible'><code>fn <a href='../../../protobuf/core/trait.ProtobufEnum.html#tymethod.value' class='fnname'>value</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i32.html">i32</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/tfdeploy/home/travis/build/kali/tensorflow-deploy-rust/target/debug/build/tfdeploy-d1e3f70959f7d45d/out/types.rs.html#57-59' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.from_i32' class="method"><span id='from_i32.v' class='invisible'><code>fn <a href='../../../protobuf/core/trait.ProtobufEnum.html#tymethod.from_i32' class='fnname'>from_i32</a>(value: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i32.html">i32</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="enum" href="../../../tfdeploy/tfpb/types/enum.DataType.html" title="enum tfdeploy::tfpb::types::DataType">DataType</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/tfdeploy/home/travis/build/kali/tensorflow-deploy-rust/target/debug/build/tfdeploy-d1e3f70959f7d45d/out/types.rs.html#61-106' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.values' class="method"><span id='values.v' class='invisible'><code>fn <a href='../../../protobuf/core/trait.ProtobufEnum.html#method.values' class='fnname'>values</a>() -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">&amp;'static [Self]</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/tfdeploy/home/travis/build/kali/tensorflow-deploy-rust/target/debug/build/tfdeploy-d1e3f70959f7d45d/out/types.rs.html#108-153' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.enum_descriptor_static' class="method"><span id='enum_descriptor_static.v' class='invisible'><code>fn <a href='../../../protobuf/core/trait.ProtobufEnum.html#method.enum_descriptor_static' class='fnname'>enum_descriptor_static</a>(_: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="enum" href="../../../tfdeploy/tfpb/types/enum.DataType.html" title="enum tfdeploy::tfpb::types::DataType">DataType</a>&gt;) -&gt; &amp;'static <a class="struct" href="../../../protobuf/reflect/struct.EnumDescriptor.html" title="struct protobuf::reflect::EnumDescriptor">EnumDescriptor</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/tfdeploy/home/travis/build/kali/tensorflow-deploy-rust/target/debug/build/tfdeploy-d1e3f70959f7d45d/out/types.rs.html#155-165' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.descriptor' class="method"><span id='descriptor.v' class='invisible'><code>fn <a href='../../../protobuf/core/trait.ProtobufEnum.html#method.descriptor' class='fnname'>descriptor</a>(&amp;self) -&gt; &amp;'static <a class="struct" href="../../../protobuf/reflect/struct.EnumValueDescriptor.html" title="struct protobuf::reflect::EnumValueDescriptor">EnumValueDescriptor</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/protobuf/core.rs.html#182-184' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.enum_descriptor' class="method"><span id='enum_descriptor.v' class='invisible'><code>fn <a href='../../../protobuf/core/trait.ProtobufEnum.html#method.enum_descriptor' class='fnname'>enum_descriptor</a>(&amp;self) -&gt; &amp;'static <a class="struct" href="../../../protobuf/reflect/struct.EnumDescriptor.html" title="struct protobuf::reflect::EnumDescriptor">EnumDescriptor</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/protobuf/core.rs.html#186-188' title='goto source code'>[src]</a></span></h4>
+</div><h3 id='impl-Copy' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html" title="trait core::marker::Copy">Copy</a> for <a class="enum" href="../../../tfdeploy/tfpb/types/enum.DataType.html" title="enum tfdeploy::tfpb::types::DataType">DataType</a></code><a href='#impl-Copy' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/tfdeploy/home/travis/build/kali/tensorflow-deploy-rust/target/debug/build/tfdeploy-d1e3f70959f7d45d/out/types.rs.html#168-169' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div><h3 id='impl-Default' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/default/trait.Default.html" title="trait core::default::Default">Default</a> for <a class="enum" href="../../../tfdeploy/tfpb/types/enum.DataType.html" title="enum tfdeploy::tfpb::types::DataType">DataType</a></code><a href='#impl-Default' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/tfdeploy/home/travis/build/kali/tensorflow-deploy-rust/target/debug/build/tfdeploy-d1e3f70959f7d45d/out/types.rs.html#171-175' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.default' class="method"><span id='default.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/default/trait.Default.html#tymethod.default' class='fnname'>default</a>() -&gt; Self</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/tfdeploy/home/travis/build/kali/tensorflow-deploy-rust/target/debug/build/tfdeploy-d1e3f70959f7d45d/out/types.rs.html#172-174' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Returns the &quot;default value&quot; for a type. <a href="https://doc.rust-lang.org/nightly/core/default/trait.Default.html#tymethod.default">Read more</a></p>
+</div></div><h3 id='impl-ProtobufValue' class='impl'><span class='in-band'><code>impl <a class="trait" href="../../../protobuf/reflect/value/trait.ProtobufValue.html" title="trait protobuf::reflect::value::ProtobufValue">ProtobufValue</a> for <a class="enum" href="../../../tfdeploy/tfpb/types/enum.DataType.html" title="enum tfdeploy::tfpb::types::DataType">DataType</a></code><a href='#impl-ProtobufValue' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/tfdeploy/home/travis/build/kali/tensorflow-deploy-rust/target/debug/build/tfdeploy-d1e3f70959f7d45d/out/types.rs.html#177-181' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.as_ref' class="method"><span id='as_ref.v' class='invisible'><code>fn <a href='../../../protobuf/reflect/value/trait.ProtobufValue.html#tymethod.as_ref' class='fnname'>as_ref</a>(&amp;self) -&gt; <a class="enum" href="../../../protobuf/reflect/value/enum.ProtobufValueRef.html" title="enum protobuf::reflect::value::ProtobufValueRef">ProtobufValueRef</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/tfdeploy/home/travis/build/kali/tensorflow-deploy-rust/target/debug/build/tfdeploy-d1e3f70959f7d45d/out/types.rs.html#178-180' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.as_any' class="method"><span id='as_any.v' class='invisible'><code>fn <a href='../../../protobuf/reflect/value/trait.ProtobufValue.html#method.as_any' class='fnname'>as_any</a>(&amp;self) -&gt; &amp;(<a class="trait" href="https://doc.rust-lang.org/nightly/core/any/trait.Any.html" title="trait core::any::Any">Any</a> + 'static)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/protobuf/reflect/value.rs.html#14-16' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.is_non_zero' class="method"><span id='is_non_zero.v' class='invisible'><code>fn <a href='../../../protobuf/reflect/value/trait.ProtobufValue.html#method.is_non_zero' class='fnname'>is_non_zero</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/protobuf/reflect/value.rs.html#18-20' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.as_ref_copy' class="method"><span id='as_ref_copy.v' class='invisible'><code>fn <a href='../../../protobuf/reflect/value/trait.ProtobufValue.html#method.as_ref_copy' class='fnname'>as_ref_copy</a>(&amp;self) -&gt; <a class="enum" href="../../../protobuf/reflect/value/enum.ProtobufValueRef.html" title="enum protobuf::reflect::value::ProtobufValueRef">ProtobufValueRef</a>&lt;'static&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/protobuf/reflect/value.rs.html#22-38' title='goto source code'>[src]</a></span></h4>
+</div><h3 id='impl-From%3CDataType%3E' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.From.html" title="trait core::convert::From">From</a>&lt;<a class="enum" href="../../../tfdeploy/tfpb/types/enum.DataType.html" title="enum tfdeploy::tfpb::types::DataType">DataType</a>&gt; for <a class="struct" href="../../../tfdeploy/tfpb/attr_value/struct.AttrValue.html" title="struct tfdeploy::tfpb::attr_value::AttrValue">AttrValue</a></code><a href='#impl-From%3CDataType%3E' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/tfdeploy/tfpb.rs.html#188-194' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.from' class="method"><span id='from.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/convert/trait.From.html#tymethod.from' class='fnname'>from</a>(t: <a class="enum" href="../../../tfdeploy/tfpb/types/enum.DataType.html" title="enum tfdeploy::tfpb::types::DataType">DataType</a>) -&gt; <a class="struct" href="../../../tfdeploy/tfpb/attr_value/struct.AttrValue.html" title="struct tfdeploy::tfpb::attr_value::AttrValue">AttrValue</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/tfdeploy/tfpb.rs.html#189-193' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Performs the conversion.</p>
+</div></div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt><kbd>?</kbd></dt>
+                    <dd>Show this help dialog</dd>
+                    <dt><kbd>S</kbd></dt>
+                    <dd>Focus the search field</dd>
+                    <dt><kbd>↑</kbd></dt>
+                    <dd>Move up in search results</dd>
+                    <dt><kbd>↓</kbd></dt>
+                    <dd>Move down in search results</dd>
+                    <dt><kbd>↹</kbd></dt>
+                    <dd>Switch tab</dd>
+                    <dt><kbd>&#9166;</kbd></dt>
+                    <dd>Go to active search result</dd>
+                    <dt><kbd>+</kbd></dt>
+                    <dd>Expand all sections</dd>
+                    <dt><kbd>-</kbd></dt>
+                    <dd>Collapse all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../../";
+        window.currentCrate = "tfdeploy";
+    </script>
+    <script src="../../../main.js"></script>
+    <script defer src="../../../search-index.js"></script>
+</body>
+</html>
