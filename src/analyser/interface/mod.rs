@@ -34,11 +34,10 @@ pub use self::solver::*;
 pub use self::expressions::{ Expression, IntoExpression };
 pub use super::prelude::*;
 
-pub fn bexp<T,IE,E>(fact: IE) -> Box<Expression<Output=T>>
+pub fn bexp<IE, E>(fact: IE) -> Box<Expression>
 where
-    E: Expression<Output=T> + 'static,
+    E: Expression + 'static,
     IE: IntoExpression<E>,
-    T: expressions::Output + 'static
 {
     Box::new(fact.into_expr())
 }

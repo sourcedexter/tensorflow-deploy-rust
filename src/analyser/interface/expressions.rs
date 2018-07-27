@@ -59,31 +59,27 @@ pub enum Wrapped {
 
 /// An expression that can be compared by the solver.
 pub trait Expression {
-    type Output: Output;
-
     /// Returns the current value of the expression in the given context.
-    fn get(&self, context: &Context) -> Result<Self::Output>;
+    fn get(&self, context: &Context) -> Result<Wrapped>;
 
     /// Tries to set the value of the expression in the given context.
-    fn set(&self, context: &mut Context, value: Self::Output) -> Result<()>;
+    fn set(&self, context: &mut Context, value: Wrapped) -> Result<()>;
 
     /// Returns the paths that the expression depends on.
     fn get_paths(&self) -> Vec<&Path>;
 }
 
 /// A constant expression (e.g. `2` or `DataType::DT_INT32`).
-pub struct ConstantExpression<T: Output>(T);
+pub struct ConstantExpression(Wrapped);
 
-impl<T: Output> Expression for ConstantExpression<T> {
-    type Output = T;
-
+impl Expression for ConstantExpression {
     /// Returns the current value of the expression in the given context.
-    fn get(&self, _: &Context) -> Result<T> {
+    fn get(&self, _: &Context) -> Result<Wrapped> {
         Ok(self.0.clone())
     }
 
     /// Tries to set the value of the expression in the given context.
-    fn set(&self, _: &mut Context, value: T) -> Result<()> {
+    fn set(&self, _: &mut Context, value: Wrapped) -> Result<()> {
         if self.0 == value {
             Ok(())
         } else {
@@ -97,24 +93,21 @@ impl<T: Output> Expression for ConstantExpression<T> {
     }
 }
 
-
 /// A reference to a variable.
 ///
 /// For instance, `inputs[0].rank` is a reference to the rank of the first
 /// input. Internally, a reference holds a Vec<usize> called a path (see
 /// the documentation for `Proxy::get_path`).
-pub struct VariableExpression<T: Output>(Path, PhantomData<T>);
+pub struct VariableExpression(Path);
 
-impl<T: Output> Expression for VariableExpression<T> {
-    type Output = T;
-
+impl Expression for VariableExpression {
     /// Returns the current value of the expression in the given context.
-    fn get(&self, context: &Context) -> Result<T> {
+    fn get(&self, context: &Context) -> Result<Wrapped> {
         context.get(&self.0)
     }
 
     /// Tries to set the value of the expression in the given context.
-    fn set(&self, context: &mut Context, value: T) -> Result<()> {
+    fn set(&self, context: &mut Context, value: Wrapped) -> Result<()> {
         context.set(&self.0, value)
     }
 
@@ -124,27 +117,18 @@ impl<T: Output> Expression for VariableExpression<T> {
     }
 }
 
-
 /// A scalar product between a constant and another expression.
-pub struct ProductExpression<T, E>(isize, E)
-where
-    T: Output + Mul<isize>,
-    E: Expression<Output = T>;
+pub struct ProductExpression<E: Expression>(isize, E);
 
-impl<T, E> Expression for ProductExpression<T, E>
-where
-    T: Output + Mul<isize, Output=T>,
-    E: Expression<Output = T>
-{
-    type Output = T;
-
+impl<E: Expression> Expression for ProductExpression<E> {
     /// Returns the current value of the expression in the given context.
-    fn get(&self, context: &Context) -> Result<T> {
-        Ok(self.1.get(context)? * self.0)
+    fn get(&self, context: &Context) -> Result<Wrapped> {
+        unimplemented!()
+        // Ok(self.1.get(context)? * self.0)
     }
 
     /// Tries to set the value of the expression in the given context.
-    fn set(&self, context: &mut Context, value: T) -> Result<()> {
+    fn set(&self, context: &mut Context, value: Wrapped) -> Result<()> {
         unimplemented!()
         // let k = &self.0;
         // let m = value;
@@ -174,7 +158,6 @@ where
         self.1.get_paths()
     }
 }
-
 
 /// A value that be converted into an expression.
 ///
@@ -234,23 +217,13 @@ impl<T> IntoExpression<VariableExpression> for T where T: ComparableProxy {
     }
 }
 
-/// Converts &ShapeProxy to VariableExpression<ShapeFact>.
-impl<'a> IntoExpression<VariableExpression<ShapeFact>> for &'a ShapeProxy {
-    fn into_expr(self) -> VariableExpression<ShapeFact> {
-        VariableExpression(self.get_path().to_vec(), PhantomData)
-    }
-}
-
-// ---------------- Conversions from tuples ---------------- //
-
-/// Converts (T, Into<Expression<Output = T>>) to ProductExpression<T>.
-impl<T, E, I> IntoExpression<ProductExpression<T, E>> for (isize, I)
+/// Converts (isize, IntoExpression) to ProductExpression<E>.
+impl<E, I> IntoExpression<ProductExpression<E>> for (isize, I)
 where
-    T: Output + Mul<isize, Output=T>,
-    E: Expression<Output = T>,
+    E: Expression,
     I: IntoExpression<E>,
 {
-    fn into_expr(self) -> ProductExpression<T, E> {
+    fn into_expr(self) -> ProductExpression<E> {
         let (k, e) = self;
         ProductExpression(k, e.into_expr())
     }
