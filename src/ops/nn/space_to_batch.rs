@@ -74,14 +74,52 @@ impl<T: Datum> Op for SpaceToBatch<T> {
 impl<T: Datum> InferenceRulesOp for SpaceToBatch<T> {
     /// Registers the inference rules of the operator.
     fn rules<'r, 'p: 'r, 's: 'r>(&'s self, solver: &mut Solver<'r>, inputs: &'p TensorsProxy, outputs: &'p TensorsProxy) {
+        debug!("get input[0]");
+        let space = &inputs[0];
+        debug!("   input[0] -> {:?}", space);
+        assert_eq!(**space.get_path(), [0, 0]);
+        debug!("get input[1]");
+        let block_shape = &inputs[1];
+        debug!("   input[1] -> {:?}", block_shape);
+        assert_eq!(**space.get_path(), [0, 0]);
+        assert_eq!(**block_shape.get_path(), [0isize,1]);
+        debug!("get input[2]");
+        let padding = &inputs[2];
+        debug!("   input[2] -> {:?}", padding);
+        assert_eq!(**(&inputs[0]).get_path(), [0, 0]);
+        assert_eq!(**space.get_path(), [0, 0]); // 4
+        assert_eq!(**block_shape.get_path(), [0isize,1]); // 1
+        assert_eq!(**padding.get_path(), [0isize,2]);
+        debug!("get output[1]");
+        let batch = &outputs[0];
+        debug!("   output[0] -> {:?}", batch);
+        assert_eq!(**batch.get_path(), [1, 0]);
+        assert_eq!(**space.get_path(), [0, 0]);
+        assert_eq!(**block_shape.get_path(), [0isize,1]);
+        assert_eq!(**padding.get_path(), [0isize,2]);
+        /*
         solver
             .equals(&inputs.len, 3)
             .equals(&outputs.len, 1);
-        rules(solver, &outputs[0], &inputs[0], &inputs[1], &inputs[2]);
+        assert_eq!(**inputs[1].get_path(), [0,1]);
+        */
+        /*
+        assert_eq!(**inputs[0].get_path(), [0,0]);
+        assert_eq!(**inputs[2].get_path(), [0,2]);
+        assert_eq!(**outputs[0].get_path(), [1,0]);
+        */
+        rules(solver, batch, space, &block_shape, &padding);
     }
 }
 
 fn rules<'r, 'p: 'r>(solver: &mut Solver<'r>, batch: &'p TensorProxy, space: &'p TensorProxy, block_shape: &'p TensorProxy, paddings: &'p TensorProxy) {
+    debug!("space: {:?} {:?} {} {}", space, &**space.get_path(), space.get_path()[0], space.get_path()[1]);
+    debug!("block_shape: {:?} {:?} {} {}", block_shape, &**block_shape.get_path(), block_shape.get_path()[0], block_shape.get_path()[1]);
+    assert_eq!(space.get_path()[1], 0);
+    assert_eq!(batch.get_path()[1], 0);
+    assert_eq!(**block_shape.get_path(), [0isize,1]);
+    assert_eq!(**paddings.get_path(), [0isize,2]);
+    /*
     solver
         .equals(&batch.datatype, &space.datatype)
         .equals(&block_shape.datatype, DataType::DT_INT32)
@@ -107,6 +145,7 @@ fn rules<'r, 'p: 'r>(solver: &mut Solver<'r>, batch: &'p TensorProxy, space: &'p
                 }
             });
         });
+        */
 }
 
 

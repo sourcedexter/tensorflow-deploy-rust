@@ -18,7 +18,7 @@ use tfdeploy::Tensor as TfdTensor;
 
 fn simplelog_init() {
     use simplelog::*;
-    let _ = TermLogger::init(LevelFilter::Trace, Config::default());
+    let _ = TermLogger::init(LevelFilter::Debug, Config::default());
 }
 
 fn space_to_batch_strat() -> BoxedStrategy<(TfdTensor, TfdTensor, TfdTensor)> {
@@ -72,7 +72,7 @@ fn space_to_batch_strat() -> BoxedStrategy<(TfdTensor, TfdTensor, TfdTensor)> {
 
 proptest! {
     #[test]
-    fn space_to_batch((ref i, ref bs, ref p) in space_to_batch_strat()) {
+    fn space_to_batch_prop((ref i, ref bs, ref p) in space_to_batch_strat()) {
         simplelog_init();
         let graph = tfpb::graph()
             .node(placeholder_f32("input"))
@@ -124,6 +124,8 @@ proptest! {
 #[test]
 fn space_to_batch_1() {
     use ndarray::*;
+    simplelog_init();
+    (1..1000000).for_each(|_| {
     let graph = tfpb::graph()
         .node(placeholder_f32("input"))
         .node(placeholder("block_shape", DT_INT32, tensor_shape(&[2])))
@@ -143,6 +145,7 @@ fn space_to_batch_1() {
     let p = arr2(&[[0, 0], [0, 0]]).into();
     let inputs = vec![("input", i), ("block_shape", bs), ("paddings", p)];
     compare(&graph, inputs, "op").unwrap()
+    });
 }
 
 #[test]
